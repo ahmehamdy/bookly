@@ -1,5 +1,4 @@
 import 'package:book_app/features/splash/presentation/Splash_View.dart';
-import 'package:book_app/features/splash/presentation/widgets/splash_body.dart';
 import 'package:flutter/material.dart';
 
 void main() {
