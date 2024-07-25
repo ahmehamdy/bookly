@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class Splash_Screen extends StatefulWidget {
   const Splash_Screen({super.key});
 
@@ -7,6 +8,7 @@ class Splash_Screen extends StatefulWidget {
   State<Splash_Screen> createState() => _Splash_ScreenState();
 }
 
+// ignore: camel_case_types
 class _Splash_ScreenState extends State<Splash_Screen>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
