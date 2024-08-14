@@ -1,15 +1,18 @@
+import 'package:book_app/core/utils/app_routers.dart';
+import 'package:book_app/core/utils/functions/sliding_animation_function.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 // ignore: camel_case_types
-class Splash_Screen extends StatefulWidget {
-  const Splash_Screen({super.key});
+class Splash_body extends StatefulWidget {
+  const Splash_body({super.key});
 
   @override
-  State<Splash_Screen> createState() => _Splash_ScreenState();
+  State<Splash_body> createState() => _Splash_bodyState();
 }
 
 // ignore: camel_case_types
-class _Splash_ScreenState extends State<Splash_Screen>
+class _Splash_bodyState extends State<Splash_body>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<Offset> slidingAnimation;
@@ -17,7 +20,23 @@ class _Splash_ScreenState extends State<Splash_Screen>
   @override
   void initState() {
     super.initState();
-    iniSlidingAnimation();
+    iniSlidingAnimation(
+        vsync: this,
+        satController: (controller) {
+          animationController = controller;
+        },
+        satAnimation: (animation) {
+          slidingAnimation = animation;
+        },beginOffset: const Offset(0, 2));
+    Future.delayed(const Duration(seconds: 2), () {
+      GoRouter.of(context).push(AppRouter.kHomeView);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
   }
 
   @override
@@ -35,22 +54,8 @@ class _Splash_ScreenState extends State<Splash_Screen>
             child: const Text(
               "Read free Books",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
             )),
       ],
     );
-  }
-
-  void iniSlidingAnimation() {
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
-    slidingAnimation =
-        Tween<Offset>(begin: const Offset(0, 4), end: const Offset(0, 0))
-            .animate(animationController);
-    animationController.forward();
-    setState(() {});
   }
 }
