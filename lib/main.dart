@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
+  setup();
   runApp(const MyApp());
 }
 
@@ -17,17 +18,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MultiBlocProvider(
+    return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context)=>NewstBooksCubit(getIt.get<HomeRepoImpi>())..featshNewBooks()),
-        BlocProvider(create: (context)=>BestSellerCubit(getIt.get<HomeRepoImpi>())..featshBestSellerBooks()),
+        BlocProvider(
+            create: (context) =>
+                NewstBooksCubit(getIt.get<HomeRepoImpi>())..featshNewBooks()),
+        BlocProvider(
+            create: (context) => BestSellerCubit(getIt.get<HomeRepoImpi>())
+              ..featshBestSellerBooks()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
-          textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark().textTheme.apply(bodyColor:Colors.white,displayColor: Colors.white)),
-          scaffoldBackgroundColor:  const Color(0xff100B20),
+          textTheme: GoogleFonts.montserratTextTheme(ThemeData.dark()
+              .textTheme
+              .apply(bodyColor: Colors.white, displayColor: Colors.white)),
+          scaffoldBackgroundColor: const Color(0xff100B20),
         ),
       ),
     );

@@ -9,27 +9,28 @@ class FeatureListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewstBooksCubit,NewstBooksState>(builder: (context,stat){
-      if(stat is NewstBooksSucces){
-        return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.29,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return const CustomBookImage();
-        },
-        itemCount: 5,
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.only(left: 20),
-      ),
+    return BlocBuilder<NewstBooksCubit, NewstBooksState>(
+      builder: (context, stat) {
+        if (stat is NewstBooksSucces) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.29,
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return const CustomBookImage();
+              },
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.only(left: 20),
+            ),
+          );
+        } else if (stat is NewstBooksFaliures) {
+          return Text(stat.error);
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
-      }
-      else if(stat is NewstBooksFaliures){
-        return Text(stat.error);
-      }
-      else{
-        return const Center(child: CircularProgressIndicator(),);
-      }
-    },);
   }
 }
-
